@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/auth";
+const API_URL = `${import.meta.env.VITE_API_URL}/api/auth`;
 
 export const registerUser = async (userData) => {
   const response = await axios.post(
@@ -24,7 +24,7 @@ export const getProfile = async () => {
   const token = localStorage.getItem("token");
 
   const response = await axios.get(
-    "http://localhost:5000/api/profile",
+    `${import.meta.env.VITE_API_URL}/api/profile`,
     {
       headers: {
         Authorization: `Bearer ${token}`

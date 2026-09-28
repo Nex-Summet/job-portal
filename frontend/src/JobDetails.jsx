@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { applyForJob } from "./api/jobApplicationApi";
@@ -15,7 +14,7 @@ function JobDetails() {
     const fetchJob = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/jobs/${id}`
+          `${import.meta.env.VITE_API_URL}/api/jobs/${id}`
         );
 
         const data = await response.json();
@@ -58,17 +57,13 @@ function JobDetails() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center px-6">
-
         <div className="text-center">
-
           <div className="w-12 h-12 border-4 border-gray-200 border-t-blue-600 rounded-full animate-spin mx-auto"></div>
 
           <p className="text-gray-500 mt-5">
             Loading job details...
           </p>
-
         </div>
-
       </div>
     );
   }
@@ -76,9 +71,7 @@ function JobDetails() {
   if (!job) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center px-6">
-
         <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-10 text-center max-w-md w-full">
-
           <div className="w-16 h-16 mx-auto rounded-2xl bg-red-50 flex items-center justify-center text-red-600 text-2xl font-bold">
             !
           </div>
@@ -97,9 +90,7 @@ function JobDetails() {
           >
             Back to Jobs
           </Link>
-
         </div>
-
       </div>
     );
   }
@@ -109,7 +100,6 @@ function JobDetails() {
 
       {/* Header */}
       <section className="bg-gray-950 text-white">
-
         <div className="max-w-6xl mx-auto px-6 py-12">
 
           <Link
@@ -122,7 +112,6 @@ function JobDetails() {
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-7">
 
             <div>
-
               <span className="inline-flex bg-blue-600/20 border border-blue-500/30 text-blue-400 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide">
                 Job Opportunity
               </span>
@@ -134,7 +123,6 @@ function JobDetails() {
               <p className="text-xl text-gray-400 mt-3">
                 {job.company}
               </p>
-
             </div>
 
             <div className="w-20 h-20 rounded-2xl bg-blue-600 flex items-center justify-center text-white text-3xl font-bold shadow-lg">
@@ -142,9 +130,7 @@ function JobDetails() {
             </div>
 
           </div>
-
         </div>
-
       </section>
 
       {/* Main Content */}
@@ -292,4 +278,3 @@ function JobDetails() {
 }
 
 export default JobDetails;
-

@@ -1,30 +1,50 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/applications";
+const API_URL = `${import.meta.env.VITE_API_URL}/api/jobs`;
 
-export const getAllApplications = async () => {
+export const createJob = async (jobData) => {
   const token = localStorage.getItem("token");
 
-  const response = await axios.get(API_URL, {
-    headers: {
-      Authorization: `Bearer ${token}`
+  const response = await axios.post(
+    API_URL,
+    jobData,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
     }
-  });
+  );
 
   return response.data;
 };
 
-export const updateApplicationStatus = async (
-  applicationId,
-  status
-) => {
+export const getAllJobs = async () => {
+  const response = await axios.get(API_URL);
+
+  return response.data;
+};
+
+export const deleteJob = async (jobId) => {
   const token = localStorage.getItem("token");
 
-  const response = await axios.patch(
-    `${API_URL}/${applicationId}/status`,
+  const response = await axios.delete(
+    `${API_URL}/${jobId}`,
     {
-      status: status
-    },
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+  );
+
+  return response.data;
+};
+
+export const updateJob = async (jobId, jobData) => {
+  const token = localStorage.getItem("token");
+
+  const response = await axios.put(
+    `${API_URL}/${jobId}`,
+    jobData,
     {
       headers: {
         Authorization: `Bearer ${token}`
